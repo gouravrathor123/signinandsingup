@@ -52,7 +52,7 @@ router.post('/signin',(req,res) => {
           return res.json(err)
         }
         if(!user){
-           return res.status(400).json('user not find')
+           return res.status(200).json('user not find')
         }
         res.send(user)
     })

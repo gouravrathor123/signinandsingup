@@ -24,14 +24,16 @@ class SignInForm extends Component {
         this.setState({
           [name]: value
         });
+
     }
 
     handleSubmit(e) {
         e.preventDefault();
 
         console.log('The form was submitted with the following data:');
+        console.log(this.state)
 
-        axios.get('http://localhost:5000/users/signin', this.state)
+        axios.post('http://localhost:5000/users/signin', this.state)
           .then(res => console.log(res.data))
           .catch()
     }
