@@ -1,36 +1,40 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route,NavLink } from 'react-router-dom';
-import SignUpForm from './pages/SignUpForm';
-import SignInForm from './pages/SignInForm';
-
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Welcome from './pages/welcome';
+import SignUp from './pages/SignUpForm';
+import LogIn from './pages/SignInForm';
+import Create from './components/create';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
+export const CredentialsContext = React.createContext()
+
+function App(){
+  const credentialsState = useState({
+    username:"gouravrathor",
+    password:"Gourav@123"
+  });
+  return(
+    <div className="App">
+    <CredentialsContext.Provider value={credentialsState}>
       <Router>
-        <div className="App">
-          <div className="App__Aside"></div>
-          <div className="App__Form">
-            <div className="PageSwitcher">
-                <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
-                <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
-              </div>
-
-              <div className="FormTitle">
-                  <NavLink to="/sign-in" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign In</NavLink> or <NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign Up</NavLink>
-              </div>
-
-              <Route exact path="/" component={SignUpForm}>
-              </Route>
-              <Route path="/sign-in" component={SignInForm}>
-              </Route>
-          </div>
-
-        </div>
+        <Switch>
+          <Route exact path = "/">
+            <Welcome />
+          </Route>
+          <Route exact path = "/sign-up">
+            <SignUp />
+          </Route>
+          <Route exact path = "/log-in">
+            <LogIn />
+          </Route>
+          <Route exact path = '/create-post'>
+            <Create />
+          </Route>
+        </Switch>
       </Router>
-    );
-  }
+      </CredentialsContext.Provider>
+     </div>
+  )
 }
 
 export default App;
