@@ -5,6 +5,7 @@ import SignUp from './pages/SignUpForm';
 import LogIn from './pages/SignInForm';
 import Create from './components/create';
 import './App.css';
+import Allposts from './components/all-posts';
 
 export const CredentialsContext = React.createContext()
 
@@ -29,6 +30,9 @@ function App(){
           </Route>
           <Route exact path = '/create-post'>
             <Create />
+          </Route>
+          <Route exact path = '/all-posts'>
+            <Allposts />
           </Route>
         </Switch>
       </Router>
